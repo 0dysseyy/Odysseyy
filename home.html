@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page Title</title>
+<meta charset = "UTF-8">
+<title>Book of ODYSSEY </title>
+<link rel = "stylesheet" href = "styles.css">
 </head>
 <body>
-
-<h1>This is a Heading</h1>
-<h2>This is a small heading</h2>
-<p>This is a paragraph.</p>
-
+<div class = "container">
+<button id = "enterBtn">Enter</button>
+</div>
+<script src = "script.js"></script>
 </body>
 </html>
+
+document.getElementById("enterBtn").addEventListener("click", function() {
+    window.location.href = "films.html";
+});
