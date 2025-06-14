@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8" />
+        <meta name = "viewport" content = "width=device-width, initial-scale+1.0" />
+        <title>Fragment</title>
+        <Link rel = "stylesheet" href = "style.css" />
+        </head>
+        <body>
+            <header>
+                <h1>The Step of Luck</h1>
+            </header>
+                <a href="films.html">← Back to Films</a>
+                
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe 
+                      src="https://www.youtube.com/embed/z7vdgBc2wDw" 
+                      title="YouTube video player" 
+                      frameborder="0" 
+                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                      allowfullscreen
+                      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    </iframe>
+                  </div>
+                  
+            <p>
+                <strong> Synopsis:</strong><br>
+                I made this short film in junior year as my final project. Providing a story that encapulated youth, love, betrayal, and uncertainty.
+            </p>
+        </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ghetto Suburbs</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      text-align: center;
+      padding: 40px;
+      font-family: sans-serif;
+    }
+
+    img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .coming-soon {
+      font-style: italic;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    #countdown {
+      font-size: 1.5em;
+      color: #444;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+      color: #0077cc;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Stay tuned</h1>
+  <a href="index.html">← Back to Directory</a>
+
+  <img src="films/ghetto click.png" />
+
+  <p>
+    Just be here when it happens.
+  </p>
+
+<p class="coming-soon">GHETTO SUBURBS - PRE PRODUCTION</p>
+
+  <h2>Countdown</h2>
+  <div id="countdown">Loading...</div>
+
+  <script>
+    // Set your project launch date here
+    const launchDate = new Date("October, 18 2025 16:20:00").getTime();
+
+    const countdownEl = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        countdownEl.innerHTML = "🎬 It's here!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script>
+</body>
+</html>
