@@ -25,22 +25,36 @@
 
 <script>
   const viewer = document.getElementById('spline');
+  let isRedirecting = false;
 
   viewer.addEventListener('load', () => {
     viewer.addEventListener('mouseDown', (event) => {
+      if (isRedirecting) return;  // Prevent multiple clicks
       if (event.detail?.target?.name === 'Enterbutton') {
+        isRedirecting = true;
         const audio = new Audio('enter.mp3');
-        audio.play();
 
-        const redirect = () => {
+        audio.addEventListener('canplaythrough', () => {
+          audio.play();
+        });
+
+        audio.addEventListener('ended', () => {
           window.location.href = 'transition.html';
-        };
+        });
 
-        // Redirect after audio ends
-        audio.addEventListener('ended', redirect);
+        // In case canplaythrough doesn't fire, play anyway
+        setTimeout(() => {
+          if (audio.paused) {
+            audio.play();
+          }
+        }, 1000);
 
-        // Fallback redirect after 5 seconds max (in case audio doesn't load)
-        setTimeout(redirect, 5000);
+        // Fallback redirect after 7 seconds
+        setTimeout(() => {
+          if (isRedirecting) {
+            window.location.href = 'transition.html';
+          }
+        }, 7000);
       }
     });
   });
