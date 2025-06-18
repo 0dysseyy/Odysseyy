@@ -4,18 +4,76 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact</title>
+  
+  <!-- Link to Nova Cut font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Nova Cut', cursive;
+      font-size: 16px;
+      color: #eee;
+      background-color: #000; /* Black background */
       margin: 0;
       padding: 2em;
-      background-color: #f9f9f9;
-      color: #333;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
+      font-weight: normal;
+      font-size: 3em;
       margin-bottom: 1em;
+      color: #fff;
+      text-align: center;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #111;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #0ff;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+      font-weight: 600;
+      font-size: 1.2em;
+      color: #0ff;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75em;
+      font-size: 1em;
+      border: 1px solid #0ff;
+      border-radius: 6px;
+      background-color: #222;
+      color: #eee;
+      box-sizing: border-box;
+      font-family: 'Nova Cut', cursive;
+    }
+
+    button {
+      display: block;
+      margin: 2em auto 0 auto;
+      padding: 0.75em 3em;
+      background-color: #0ff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.3em;
+      cursor: pointer;
+      font-family: 'Nova Cut', cursive;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00b8b8;
     }
 
     .social-links {
@@ -27,40 +85,13 @@
 
     .social-links a {
       text-decoration: none;
-      color: #0077b5; /* Default to LinkedIn blue */
-      font-size: 1.2em;
+      color: #0ff;
+      font-size: 1.4em;
+      font-family: 'Nova Cut', cursive;
     }
 
-    form {
-      max-width: 600px;
-      margin: 0 auto;
-      background: white;
-      padding: 2em;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 0.75em;
-      margin-top: 0.5em;
-      margin-bottom: 1.5em;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1em;
-    }
-
-    button {
-      padding: 0.75em 2em;
-      background-color: #333;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #555;
+    .social-links a:hover {
+      color: #00b8b8;
     }
   </style>
 </head>
