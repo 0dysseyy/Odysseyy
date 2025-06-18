@@ -6,42 +6,45 @@
 <head>
   <meta charset="UTF-8" />
   <title>3D Homepage</title>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.94/build/spline-viewer.js"></script>
   <style>
     html, body {
       margin: 0;
       height: 100%;
-      background-color: black;
     }
-    canvas {
-      display: block;
+    spline-viewer {
       width: 100%;
       height: 100%;
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <canvas id="canvas3d"></canvas>
+  <spline-viewer id="spline" url="https://prod.spline.design/0hYoAaAJ6DD8vOLf/scene.splinecode"></spline-viewer>
 
-  <script type="module">
-    import { Application } from 'https://unpkg.com/@splinetool/runtime@0.9.484/build/runtime.js';
+<script>
+  const viewer = document.getElementById('spline');
 
-    const canvas = document.getElementById('canvas3d');
-    const app = new Application(canvas);
-
-    app.load('https://prod.spline.design/0hYoAaAJ6DD8vOLf/scene.splinecode');
-
-    app.addEventListener('mouseDown', (e) => {
-      if (e.target?.name === 'Enterbutton') {
-        const audio = new Audio('enter.mp3'); // Make sure the file exists!
+  viewer.addEventListener('load', () => {
+    viewer.addEventListener('mouseDown', (event) => {
+      if (event.detail?.target?.name === 'Enterbutton') {
+        const audio = new Audio('enter.mp3');
         audio.play();
 
-        setTimeout(() => {
+        const redirect = () => {
           window.location.href = 'transition.html';
-        }, 1000);
+        };
+
+        // Redirect after audio ends
+        audio.addEventListener('ended', redirect);
+
+        // Fallback redirect after 5 seconds max (in case audio doesn't load)
+        setTimeout(redirect, 5000);
       }
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
