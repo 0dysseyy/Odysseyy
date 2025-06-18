@@ -13,7 +13,6 @@
       background-color: black;
       transition: opacity 2s ease;
     }
-
     canvas {
       display: block;
     }
@@ -23,33 +22,32 @@
   <canvas id="canvas3d"></canvas>
 
   <script type="module">
-    import { Application } from "https://unpkg.com/@splinetool/runtime/build/runtime.js";
+    import { Application } from "https://cdn.jsdelivr.net/npm/@splinetool/runtime@0.9.274/build/runtime.js";
 
     const canvas = document.getElementById("canvas3d");
     const app = new Application(canvas);
-    app.load("https://prod.spline.design/46dee007-d308-4917-b17f-06dca4e5fc1f/scene.splinecode");
 
-    app.addEventListener("onLoad", () => {
+    app.load("https://prod.spline.design/0hYoAaAJ6DD8vOLf/scene.splinecode");
+
+    app.on("load", () => {
       console.log("✅ Spline scene loaded");
-    });
 
-    app.addEventListener("onMouseDown", (e) => {
-      console.log("🖱️ Clicked on:", e.target.name);
+      app.on("mousedown", (e) => {
+        console.log("🖱️ Clicked on:", e.target?.name);
 
-      if (e.target.name === "Enterbutton") {
-        const audio = new Audio("https://raw.githubusercontent.com/0dysseyy/Odysseyy/main/enter.mp3");
-        audio.volume = 1.0;
-        audio.play();
-        console.log("🔊 Audio started");
+        if (e.target?.name === "Enterbutton") {
+          const audio = new Audio("https://raw.githubusercontent.com/0dysseyy/Odysseyy/main/enter.mp3");
+          audio.volume = 1.0;
+          audio.play().catch(err => console.warn("Audio play failed:", err));
+          console.log("🔊 Audio started");
 
-        // Fade out
-        document.body.style.opacity = "0";
+          document.body.style.opacity = "0";
 
-        // Wait 2 seconds before redirect
-        setTimeout(() => {
-          window.location.href = "Directory.html";
-        }, 2000);
-      }
+          setTimeout(() => {
+            window.location.href = "Directory.html";
+          }, 2000);
+        }
+      });
     });
   </script>
 </body>
