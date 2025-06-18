@@ -4,51 +4,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Debug 3D Click & Audio</title>
-<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.9/build/spline-viewer.js"></script>
-<style>
-  html, body { margin:0; padding:0; height:100%; background:#000; overflow:hidden; color:#fff; font-family: sans-serif;}
-</style>
+  <meta charset="UTF-8" />
+  <title>Odysseyy Debug</title>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.9/build/spline-viewer.js"></script>
+  <style>
+    html, body { margin: 0; height: 100%; background: black; overflow: hidden; color: white; font-family: sans-serif; }
+    body.fade-out { opacity: 0; transition: opacity 1s ease; }
+  </style>
 </head>
 <body>
   <spline-viewer id="viewer" url="https://prod.spline.design/0hYoAaAJ6DD8vOLf/scene.splinecode"></spline-viewer>
-  <div style="position:absolute;top:10px;left:10px;">Open console before clicking "Enter"</div>
 
   <script>
     const viewer = document.getElementById('viewer');
+
     viewer.addEventListener('load', () => {
       console.log('✅ Spline loaded');
-      
-      viewer.addEventListener('mouseDown', (e) => {
-        console.log('mouseDown event:', e);
-      });
 
-      viewer.addEventListener('click', (e) => {
-        console.log('click event:', e);
-        const name = e.detail?.target?.name || '(no name)';
-        console.log('Clicked object name:', name);
-        
-        if (name === 'Enterbutton') {
-          console.log('🎯 "Enterbutton" was clicked!');
-          
-          const audio = new Audio('enter.mp3');
-          audio.preload = 'auto';
-          audio.load();
+      viewer.addEventListener('mouseDown', (event) => {
+        const name = event.detail?.target?.name;
+        console.log('🖱️ Clicked on:', name);
+
+        if (name === 'Enter' || name === 'Enterbutton') {
+          console.log('🎯 Detected "Enter" click');
+
+          const audio = new Audio('https://raw.githubusercontent.com/0dysseyy/Odysseyy/main/enter.mp3');
 
           audio.addEventListener('canplaythrough', () => {
-            console.log('-- audio ready to play');
-            audio.play()
-              .then(() => console.log('-- audio started'))
-              .catch(err => console.error('-- audio.play error:', err));
+            console.log('-- audio ready');
+            audio.play().then(() => {
+              console.log('-- audio playing...');
+              audio.onended = () => {
+                console.log('-- audio done, redirecting...');
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                  window.location.href = 'transition.html';
+                }, 1000);
+              };
+            }).catch(err => {
+              console.error('-- audio play failed:', err);
+              window.location.href = 'transition.html';
+            });
           });
 
-          audio.addEventListener('ended', () => {
-            console.log('-- audio ended playback');
-          });
-
-          audio.addEventListener('error', (err) => {
-            console.error('-- audio ERROR', err);
+          audio.addEventListener('error', (e) => {
+            console.error('-- audio error:', e);
           });
         }
       });
