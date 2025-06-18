@@ -5,50 +5,74 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Odyssey</title>
+  <title>3D Homepage</title>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.94/build/spline-viewer.js"></script>
   <style>
-    body {
+    html, body {
       margin: 0;
+      height: 100%;
+      overflow: hidden;
       background-color: black;
-      transition: opacity 2s ease;
+      transition: opacity 1.5s ease;
+      opacity: 1;
     }
-    canvas {
+    spline-viewer {
+      width: 100%;
+      height: 100%;
       display: block;
+    }
+    /* Fade out class */
+    .fade-out {
+      opacity: 0;
     }
   </style>
 </head>
 <body>
-  <canvas id="canvas3d"></canvas>
 
-  <script type="module">
-    import { Application } from "https://cdn.jsdelivr.net/npm/@splinetool/runtime@0.9.274/build/runtime.js";
+  <spline-viewer id="spline" url="https://prod.spline.design/0hYoAaAJ6DD8vOLf/scene.splinecode"></spline-viewer>
 
-    const canvas = document.getElementById("canvas3d");
-    const app = new Application(canvas);
+<script>
+  const viewer = document.getElementById('spline');
+  let isRedirecting = false;
 
-    app.load("https://prod.spline.design/0hYoAaAJ6DD8vOLf/scene.splinecode");
+  viewer.addEventListener('load', () => {
+    viewer.addEventListener('mouseDown', (event) => {
+      if (isRedirecting) return;
 
-    app.on("load", () => {
-      console.log("✅ Spline scene loaded");
+      if (event.detail?.target?.name === 'Enterbutton') {
+        isRedirecting = true;
+        
+        const audio = new Audio('https://raw.githubusercontent.com/0dysseyy/Odysseyy/main/enter.mp3');
 
-      app.on("mousedown", (e) => {
-        console.log("🖱️ Clicked on:", e.target?.name);
+        audio.addEventListener('canplaythrough', () => {
+          audio.play();
+        });
 
-        if (e.target?.name === "Enterbutton") {
-          const audio = new Audio("https://raw.githubusercontent.com/0dysseyy/Odysseyy/main/enter.mp3");
-          audio.volume = 1.0;
-          audio.play().catch(err => console.warn("Audio play failed:", err));
-          console.log("🔊 Audio started");
-
-          document.body.style.opacity = "0";
-
+        audio.addEventListener('ended', () => {
+          document.body.classList.add('fade-out');
           setTimeout(() => {
-            window.location.href = "Directory.html";
-          }, 2000);
-        }
-      });
+            window.location.href = 'transition.html';
+          }, 1500);
+        });
+
+        setTimeout(() => {
+          if (audio.paused) {
+            audio.play();
+          }
+        }, 1000);
+
+        setTimeout(() => {
+          if (isRedirecting) {
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+              window.location.href = 'transition.html';
+            }, 1500);
+          }
+        }, 10000);
+      }
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
