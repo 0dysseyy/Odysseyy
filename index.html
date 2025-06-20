@@ -6,74 +6,96 @@
 <head>
   <meta charset="UTF-8" />
   <title>3D Homepage</title>
-  <!-- Use latest Spline Viewer runtime -->
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
+
+  <!-- Polyfill for Import Maps -->
+  <script async src="https://unpkg.com/es-module-shims@2.6.0/dist/es-module-shims.js"></script>
+
+  <!-- Import Map for @splinetool/runtime -->
+  <script type="importmap">
+    {
+      "imports": {
+        "@splinetool/runtime": "https://unpkg.com/@splinetool/runtime@1.10.10/build/runtime.js"
+      }
+    }
+  </script>
+
   <style>
     html, body {
       margin: 0;
+      padding: 0;
       height: 100%;
       overflow: hidden;
       background-color: black;
-      transition: opacity 1.5s ease;
       opacity: 1;
+      transition: opacity 1.5s ease;
     }
-    spline-viewer {
+
+    canvas {
+      display: block;
       width: 100%;
       height: 100%;
-      display: block;
     }
-    /* Fade out class */
+
     .fade-out {
       opacity: 0;
     }
   </style>
 </head>
 <body>
+  <canvas id="canvas3d"></canvas>
 
-  <spline-viewer id="spline" url="https://prod.spline.design/0hYoAaAJ6DD8vOLf/scene.splinecode"></spline-viewer>
+  <script type="module">
+    import { Application } from "@splinetool/runtime";
 
-<script>
-  const viewer = document.getElementById('spline');
-  let isRedirecting = false;
+    const canvas = document.getElementById("canvas3d");
+    const app = new Application(canvas);
 
-  viewer.addEventListener('load', () => {
-    viewer.addEventListener('mouseDown', (event) => {
-      if (isRedirecting) return;
+    let isRedirecting = false;
 
-      if (event.detail?.target?.name === 'Enterbutton') {
-        isRedirecting = true;
-        
-        const audio = new Audio('https://raw.githubusercontent.com/0dysseyy/Odysseyy/main/enter.mp3');
+    app.load("https://prod.spline.design/0hYoAaAJ6DD8vOLf/scene.splinecode");
 
-        audio.addEventListener('canplaythrough', () => {
-          audio.play();
-        });
+    app.addEventListener("onLoad", () => {
+      console.log("✅ Spline loaded");
 
-        audio.addEventListener('ended', () => {
-          document.body.classList.add('fade-out');
-          setTimeout(() => {
-            window.location.href = 'transition.html';
-          }, 1500);
-        });
+      app.addEventListener("onMouseDown", (e) => {
+        if (isRedirecting) return;
 
-        setTimeout(() => {
-          if (audio.paused) {
-            audio.play();
-          }
-        }, 1000);
+        const clicked = e.target?.name;
+        console.log("🖱️ Clicked:", clicked);
 
-        setTimeout(() => {
-          if (isRedirecting) {
-            document.body.classList.add('fade-out');
+        if (clicked === "Enterbutton") {
+          isRedirecting = true;
+
+          const audio = new Audio("https://raw.githubusercontent.com/0dysseyy/Odysseyy/main/enter.mp3");
+
+          audio.addEventListener("canplaythrough", () => {
+            audio.play().then(() => {
+              console.log("🔊 Audio playing...");
+            });
+          });
+
+          audio.addEventListener("ended", () => {
+            console.log("🔚 Audio ended, starting fade out");
+            document.body.classList.add("fade-out");
+
             setTimeout(() => {
-              window.location.href = 'transition.html';
-            }, 1500);
-          }
-        }, 10000);
-      }
-    });
-  });
-</script>
+              window.location.href = "transition.html";
+            }, 1500); // match fade duration
+          });
 
+          // Force redirect if something fails after 10s
+          setTimeout(() => {
+            if (isRedirecting) {
+              console.warn("⚠️ Audio delay fallback - redirecting...");
+              document.body.classList.add("fade-out");
+              setTimeout(() => {
+                window.location.href = "transition.html";
+              }, 1500);
+            }
+          }, 10000);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
