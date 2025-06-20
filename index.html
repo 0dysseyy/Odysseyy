@@ -54,10 +54,19 @@
     const canvas = document.getElementById("canvas3d");
     const app = new Application(canvas);
 
-    // Load your custom Spline scene
     app.load("https://prod.spline.design/0hYoAaAJ6DD8vOLf/scene.splinecode");
 
     let isRedirecting = false;
+
+    const pageMap = {
+      "Contact": "contact.html",
+      "About": "About.html",
+      "Suspect": "suspect.html",
+      "Figment": "Figment.html",
+      "Step": "step.html",
+      "Fragment": "Fragment.html",
+      "Ghetto": "Ghetto.html"
+    };
 
     app.addEventListener("onLoad", () => {
       console.log("✅ Spline scene loaded");
@@ -66,7 +75,9 @@
         const clicked = e.target?.name;
         console.log("🖱️ Clicked object:", clicked);
 
-        if (clicked === "Enterbutton" && !isRedirecting) {
+        if (isRedirecting) return;
+
+        if (clicked === "Enterbutton") {
           isRedirecting = true;
 
           const audio = new Audio("https://raw.githubusercontent.com/0dysseyy/Odysseyy/main/enter.mp3");
@@ -83,10 +94,10 @@
 
             setTimeout(() => {
               window.location.href = "transition.html";
-            }, 1500); // Wait for fade
+            }, 1500);
           });
 
-          // Backup in case audio fails
+          // Fallback in case audio doesn't trigger `ended`
           setTimeout(() => {
             if (!audio.ended) {
               console.warn("⚠️ Forcing redirect after timeout...");
@@ -96,6 +107,15 @@
               }, 1500);
             }
           }, 10000);
+
+        } else if (pageMap[clicked]) {
+          isRedirecting = true;
+          console.log(`➡️ Redirecting to ${pageMap[clicked]}...`);
+          document.body.classList.add("fade-out");
+
+          setTimeout(() => {
+            window.location.href = pageMap[clicked];
+          }, 1500);
         }
       });
     });
