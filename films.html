@@ -1,121 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Film</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .spline-container {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .spline-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .film-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-    }
-
-    .film-item {
-      text-align: center;
-    }
-
-    h1 {
-      padding: 1rem;
-      text-align: center;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    @media (max-width: 768px) {
-      .film-gallery {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-      }
-
-      .film-item p {
-        font-size: 1rem;
-        margin-top: 0.5rem;
-      }
-
-      a {
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Film Gallery</title>
+<style>
+  body {
+    margin: 0; padding: 2rem; background: #f0f0f0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+  .film-item {
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    overflow: hidden;
+    background: white;
+  }
+  canvas {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+  }
+  .title {
+    text-align: center;
+    padding: 0.5rem 0;
+    font-weight: bold;
+  }
+</style>
 </head>
 <body>
-  <h1>Visuals</h1>
-  <a href="index.html">← Back to Directory</a>
 
-  <div class="film-gallery">
-    <!-- 🔁 Fragment -->
-    <div class="film-item">
-      <a href="Fragment.html">
-        <div class="spline-container">
-          <iframe src="https://my.spline.design/fragmentclickableicon-5rKJowaia70EM6rRptbl4HUo/" allowfullscreen></iframe>
-        </div>
-        <p>Fragment</p>
-      </a>
-    </div>
+<div class="film-item">
+  <canvas id="canvas1"></canvas>
+  <div class="title">Fragment</div>
+</div>
 
-    <!-- Step -->
-    <div class="film-item">
-      <a href="step.html">
-        <div class="spline-container">
-          <iframe src="https://my.spline.design/stepofluckclickable-mohe500KeoYLCyGKQJs9eBSI/" allowfullscreen></iframe>
-        </div>
-        <p>The Step of Luck</p>
-      </a>
-    </div>
+<div class="film-item">
+  <canvas id="canvas2"></canvas>
+  <div class="title">The Step of Luck</div>
+</div>
 
-    <!-- Suspect -->
-    <div class="film-item">
-      <a href="Suspect.html">
-        <div class="spline-container">
-          <iframe src="https://my.spline.design/suspectclickable-pu0lvOO0AcmbURGKEQOMGjmo/" allowfullscreen></iframe>
-        </div>
-        <p>The Suspect</p>
-      </a>
-    </div>
+<div class="film-item">
+  <canvas id="canvas3"></canvas>
+  <div class="title">The Suspect</div>
+</div>
 
-    <!-- Figment (typo fixed: "spline-contaer" → "spline-container") -->
-    <div class="film-item">
-      <a href="Figment.html">
-        <div class="spline-container">
-          <iframe src="https://my.spline.design/figmentclickable-Fv3WxQ0WesdmYRWVUpCTzbKv/" allowfullscreen></iframe>
-        </div>
-        <p>Figment</p>
-      </a>
-    </div>
+<div class="film-item">
+  <canvas id="canvas4"></canvas>
+  <div class="title">Figment</div>
+</div>
 
-    <!-- Ghetto Suburbs (moved iframe into container) -->
-    <div class="film-item">
-      <a href="Ghetto.html">
-        <div class="spline-container">
-          <iframe src="https://my.spline.design/untitled-JGiRpTAtvzv1RhIDPQvlK2yx/" allowfullscreen></iframe>
-        </div>
-        <p>Ghetto Suburbs</p>
-      </a>
-    </div>
-  </div>
+<div class="film-item">
+  <canvas id="canvas5"></canvas>
+  <div class="title">Ghetto Suburbs</div>
+</div>
+
+<script type="module">
+  import { Application } from '@splinetool/runtime';
+
+  // Fragment
+  const canvas1 = document.getElementById('canvas1');
+  const app1 = new Application(canvas1);
+  app1.load('https://prod.spline.design/UBl1LTRptavYPZ2l/scene.splinecode');
+  canvas1.addEventListener('mousedown', () => {
+    window.location.href = 'Fragment.html';
+  });
+
+  // Step
+  const canvas2 = document.getElementById('canvas2');
+  const app2 = new Application(canvas2);
+  app2.load('https://prod.spline.design/UBl1LTRptavYPZ2l/scene.splinecode');
+  canvas2.addEventListener('mousedown', () => {
+    window.location.href = 'step.html';
+  });
+
+  // Suspect
+  const canvas3 = document.getElementById('canvas3');
+  const app3 = new Application(canvas3);
+  app3.load('https://prod.spline.design/Lco2LiOi3l-DzvXn/scene.splinecode');
+  canvas3.addEventListener('mousedown', () => {
+    window.location.href = 'suspect.html';
+  });
+
+  // Figment
+  const canvas4 = document.getElementById('canvas4');
+  const app4 = new Application(canvas4);
+  app4.load('https://prod.spline.design/Fv3WxQ0WesdmYRWVUpCTzbKv/scene.splinecode'); // <- Update if you have correct URL
+  canvas4.addEventListener('mousedown', () => {
+    window.location.href = 'Figment.html';
+  });
+
+  // Ghetto
+  const canvas5 = document.getElementById('canvas5');
+  const app5 = new Application(canvas5);
+  app5.load('https://prod.spline.design/ik-6a9OO-hH9qWVT/scene.splinecode');
+  canvas5.addEventListener('mousedown', () => {
+    window.location.href = 'Ghetto.html';
+  });
+</script>
+
 </body>
 </html>
