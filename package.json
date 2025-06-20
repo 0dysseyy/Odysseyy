@@ -18,6 +18,7 @@
   "homepage": "https://github.com/0dysseyy/Odysseyy#readme",
   "description": "",
   "dependencies": {
+    "@splinetool/runtime": "^1.10.12",
     "express": "^5.1.0"
   }
 }
