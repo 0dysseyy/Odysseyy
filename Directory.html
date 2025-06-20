@@ -2,47 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Directory</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.94/build/spline-viewer.js"></script>
+  <title>Odyssey Navigation</title>
+
+  <!-- Import maps polyfill -->
+  <script
+    async
+    src="https://unpkg.com/es-module-shims@2.6.0/dist/es-module-shims.js"
+  ></script>
+
+  <!-- Import map pointing to Spline Runtime -->
+  <script type="importmap">
+    {
+      "imports": {
+        "@splinetool/runtime": "https://unpkg.com/@splinetool/runtime@1.10.10/build/runtime.js"
+      }
+    }
+  </script>
+
   <style>
     html, body {
       margin: 0;
+      padding: 0;
       height: 100%;
+      background-color: black;
       overflow: hidden;
+      transition: opacity 1.5s ease;
+      opacity: 1;
     }
-    spline-viewer {
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    canvas {
       width: 100%;
-      height: 100vh;
+      height: 100%;
       display: block;
     }
   </style>
 </head>
 <body>
 
-  <!-- 3D Directory Embed -->
-  <spline-viewer 
-    id="spline" 
-    url="https://prod.spline.design/rOoNKAXx1CIhH091Ek4o0aes/scene.splinecode">
-  </spline-viewer>
+  <canvas id="canvas3d"></canvas>
 
-  <script>
-    const viewer = document.getElementById('spline');
+  <script type="module">
+    import { Application } from "@splinetool/runtime";
 
-    viewer.addEventListener('load', () => {
-      viewer.addEventListener('mouseDown', (event) => {
-        const clicked = event.detail?.target?.name;
+    const canvas = document.getElementById("canvas3d");
+    const app = new Application(canvas);
 
-        if (clicked === 'About') {
-          window.location.href = 'About.html';
-        } else if (clicked === 'Film') {
-          window.location.href = 'film.html';
-        } else if (clicked === 'Contact') {
-          window.location.href = 'Contact.html';
+    app.load("https://prod.spline.design/04Tal5A6vOOdagoY/scene.splinecode");
+
+    const pageMap = {
+      "Contact": "contact.html",
+      "About": "About.html",
+      "Suspect": "Suspect.html",
+      "Figment": "Figment.html",
+      "Step": "step.html",
+      "Fragment": "Fragment.html",
+      "Ghetto": "Ghetto.html"
+    };
+
+    let isRedirecting = false;
+
+    app.addEventListener("onLoad", () => {
+      console.log("✅ Spline navigation scene loaded.");
+
+      app.addEventListener("onMouseDown", (e) => {
+        const clicked = e.target?.name;
+        console.log("🖱️ Clicked:", clicked);
+
+        if (!isRedirecting && pageMap[clicked]) {
+          isRedirecting = true;
+
+          document.body.classList.add("fade-out");
+          setTimeout(() => {
+            window.location.href = pageMap[clicked];
+          }, 1500); // match fade-out timing
         }
       });
     });
   </script>
+
 </body>
 </html>
