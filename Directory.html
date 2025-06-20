@@ -3,87 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <title>Odyssey Navigation</title>
-
-  <!-- Import maps polyfill -->
-  <script
-    async
-    src="https://unpkg.com/es-module-shims@2.6.0/dist/es-module-shims.js"
-  ></script>
-
-  <!-- Import map for Spline Runtime -->
-  <script type="importmap">
-    {
-      "imports": {
-        "@splinetool/runtime": "https://unpkg.com/@splinetool/runtime@1.10.10/build/runtime.js"
-      }
-    }
-  </script>
-
   <style>
     html, body {
       margin: 0;
-      padding: 0;
       height: 100%;
-      background-color: black;
+      background: black;
       overflow: hidden;
       transition: opacity 1.5s ease;
       opacity: 1;
     }
-
-    .fade-out {
-      opacity: 0;
-    }
-
     canvas {
       width: 100%;
       height: 100%;
       display: block;
     }
+    .fade-out {
+      opacity: 0;
+    }
   </style>
 </head>
 <body>
 
-  <canvas id="canvas3d"></canvas>
+<canvas id="canvas3d"></canvas>
 
-  <script type="module">
-    import { Application } from "@splinetool/runtime";
+<!-- Import maps polyfill -->
+<script async src="https://unpkg.com/es-module-shims@2.6.0/dist/es-module-shims.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "@splinetool/runtime": "https://unpkg.com/@splinetool/runtime@1.10.10/build/runtime.js"
+    }
+  }
+</script>
 
-    const canvas = document.getElementById("canvas3d");
-    const app = new Application(canvas);
+<script type="module">
+  import { Application } from '@splinetool/runtime';
 
-    // ✅ Correct production Spline URL
-    app.load("https://prod.spline.design/04Tal5A6vOOdagoY/scene.splinecode");
+  const canvas = document.getElementById('canvas3d');
+  const app = new Application(canvas);
 
-    const pageMap = {
-      "Contact": "contact.html",
-      "About": "about.html",
-      "Suspect": "suspect.html",
-      "Figment": "figment.html",
-      "Step": "step.html",
-      "Fragment": "fragment.html",
-      "Ghetto": "ghetto.html"
-    };
+  const pageMap = {
+    "Contact": "contact.html",
+    "About": "about.html",
+    "Suspect": "suspect.html",
+    "Figment": "figment.html",
+    "Fragment": "fragment.html",
+    "Step of Luck": "step.html",
+    "Ghetto": "ghetto.html"
+  };
 
-    let isRedirecting = false;
+  app.load('https://prod.spline.design/04Tal5A6vOOdagoY/scene.splinecode').then(() => {
+    app.addEventListener('onMouseDown', (e) => {
+      const clickedName = e.target.name;
+      console.log("Clicked object:", clickedName);
 
-    app.addEventListener("onLoad", () => {
-      console.log("✅ Spline scene loaded");
-
-      app.addEventListener("onMouseDown", (e) => {
-        const clickedName = e.target?.name;
-        console.log("🖱️ Clicked:", clickedName);
-
-        if (!isRedirecting && pageMap[clickedName]) {
-          isRedirecting = true;
-
-          document.body.classList.add("fade-out");
-          setTimeout(() => {
-            window.location.href = pageMap[clickedName];
-          }, 1500); // match fade-out animation
-        }
-      });
+      if (pageMap[clickedName]) {
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = pageMap[clickedName];
+        }, 1500); // Match fade duration
+      }
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
