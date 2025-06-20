@@ -10,7 +10,7 @@
     src="https://unpkg.com/es-module-shims@2.6.0/dist/es-module-shims.js"
   ></script>
 
-  <!-- Import map pointing to Spline Runtime -->
+  <!-- Import map for Spline Runtime -->
   <script type="importmap">
     {
       "imports": {
@@ -51,34 +51,35 @@
     const canvas = document.getElementById("canvas3d");
     const app = new Application(canvas);
 
+    // ✅ Correct production Spline URL
     app.load("https://prod.spline.design/04Tal5A6vOOdagoY/scene.splinecode");
 
     const pageMap = {
       "Contact": "contact.html",
-      "About": "About.html",
-      "Suspect": "Suspect.html",
-      "Figment": "Figment.html",
+      "About": "about.html",
+      "Suspect": "suspect.html",
+      "Figment": "figment.html",
       "Step": "step.html",
-      "Fragment": "Fragment.html",
-      "Ghetto": "Ghetto.html"
+      "Fragment": "fragment.html",
+      "Ghetto": "ghetto.html"
     };
 
     let isRedirecting = false;
 
     app.addEventListener("onLoad", () => {
-      console.log("✅ Spline navigation scene loaded.");
+      console.log("✅ Spline scene loaded");
 
       app.addEventListener("onMouseDown", (e) => {
-        const clicked = e.target?.name;
-        console.log("🖱️ Clicked:", clicked);
+        const clickedName = e.target?.name;
+        console.log("🖱️ Clicked:", clickedName);
 
-        if (!isRedirecting && pageMap[clicked]) {
+        if (!isRedirecting && pageMap[clickedName]) {
           isRedirecting = true;
 
           document.body.classList.add("fade-out");
           setTimeout(() => {
-            window.location.href = pageMap[clicked];
-          }, 1500); // match fade-out timing
+            window.location.href = pageMap[clickedName];
+          }, 1500); // match fade-out animation
         }
       });
     });
