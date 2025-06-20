@@ -38,24 +38,13 @@
       text-decoration: underline;
     }
 
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
+    video {
+      display: block;
       max-width: 100%;
+      height: auto;
+      margin: 0 auto 2rem;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-      margin-bottom: 2rem;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
     }
 
     p {
@@ -91,14 +80,10 @@
 
   <a href="films.html">← Back to Films</a>
 
-  <div class="video-container">
-    <iframe
-      src="https://www.youtube.com/embed/REPLACE_WITH_VIDEO_ID"
-      title="Fragment Short Film"
-      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  </div>
+  <video controls>
+    <source src="fragment.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
   <p>
     <strong>Synopsis:</strong><br>
