@@ -58,16 +58,6 @@
 
     let isRedirecting = false;
 
-    const pageMap = {
-      "Contact": "contact.html",
-      "About": "About.html",
-      "Suspect": "suspect.html",
-      "Figment": "Figment.html",
-      "Step": "step.html",
-      "Fragment": "Fragment.html",
-      "Ghetto": "Ghetto.html"
-    };
-
     app.addEventListener("onLoad", () => {
       console.log("✅ Spline scene loaded");
 
@@ -107,15 +97,6 @@
               }, 1500);
             }
           }, 10000);
-
-        } else if (pageMap[clicked]) {
-          isRedirecting = true;
-          console.log(`➡️ Redirecting to ${pageMap[clicked]}...`);
-          document.body.classList.add("fade-out");
-
-          setTimeout(() => {
-            window.location.href = pageMap[clicked];
-          }, 1500);
         }
       });
     });
