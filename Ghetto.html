@@ -4,66 +4,105 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ghetto Suburbs</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- Nova Cut Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet" />
+
   <style>
     body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Nova Cut', cursive;
       text-align: center;
-      padding: 40px;
-      font-family: sans-serif;
+      padding: 2rem;
+      margin: 0;
+    }
+
+    a {
+      color: #0af;
+      text-decoration: none;
+      font-size: 1.1rem;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
 
     img {
       max-width: 90%;
       height: auto;
       border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin: 1.5rem 0;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-top: 2rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #ccc;
+      line-height: 1.6;
     }
 
     .coming-soon {
       font-style: italic;
-      color: #888;
-      margin-top: 10px;
+      color: #ffcc00;
+      margin-top: 1rem;
+      font-size: 1.2rem;
     }
 
     #countdown {
-      font-size: 1.5em;
-      color: #444;
-      margin-top: 20px;
+      font-size: 2rem;
+      margin-top: 1.5rem;
       font-weight: bold;
+      color: #0af;
     }
 
-    a {
-      text-decoration: none;
-      color: #0077cc;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
 
-    a:hover {
-      text-decoration: underline;
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      #countdown {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
+
   <h1>Stay tuned</h1>
   <a href="index.html">← Back to Directory</a>
 
-  <img src="films/ghetto click.png" />
+  <img src="films/ghetto1.png" alt="Ghetto Suburbs Poster" />
 
   <p>
     Just be here when it happens.
   </p>
 
-<p class="coming-soon">GHETTO SUBURBS - PRE PRODUCTION</p>
+  <p class="coming-soon">GHETTO SUBURBS - PRE PRODUCTION</p>
 
   <h2>Countdown</h2>
   <div id="countdown">Loading...</div>
 
   <script>
-    // Set your project launch date here
-    const launchDate = new Date("October, 18 2025 16:20:00").getTime();
-
+    const launchDate = new Date("October 18, 2025 16:20:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
     const timer = setInterval(() => {
@@ -84,5 +123,6 @@
       countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
   </script>
+
 </body>
 </html>
