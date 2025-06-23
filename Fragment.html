@@ -18,24 +18,34 @@
       line-height: 1.6;
     }
 
-    header h1 {
-      text-align: center;
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1px;
-      color: #fefefe;
+    .nav-links {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 2rem;
+      z-index: 1000;
     }
 
-    a {
+    .nav-links a {
       color: #0af;
       text-decoration: none;
-      display: inline-block;
-      margin-bottom: 2rem;
       font-size: 1.1rem;
     }
 
-    a:hover {
+    .nav-links a:hover {
       text-decoration: underline;
+    }
+
+    header h1 {
+      text-align: center;
+      font-size: 3rem;
+      margin-top: 4rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      color: #fefefe;
     }
 
     video {
@@ -69,16 +79,25 @@
         font-size: 1rem;
         padding: 0 1rem;
       }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
+  <div class="nav-links">
+    <a href="Directory.html">← Back to Directory</a>
+    <a href="films.html">🎞️ All Films</a>
+  </div>
+
   <header>
     <h1>Fragment</h1>
   </header>
-
-  <a href="films.html">← Back to Films</a>
 
   <video controls>
     <source src="fragment.mp4" type="video/mp4" />
