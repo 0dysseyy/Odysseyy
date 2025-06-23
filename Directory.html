@@ -60,32 +60,20 @@
       if (pageMap[clickedName]) {
         document.body.classList.add('fade-out');
         setTimeout(() => {
-          // Use replace instead of href to avoid history caching issues
-          window.location.replace(pageMap[clickedName]);
-        }, 1500);
+          window.location.href = pageMap[clickedName];
+        }, 1500); // Match fade duration
       }
     });
   });
 </script>
 
 <script>
-  // Disable bfcache in some browsers by adding unload listener
-  window.addEventListener('unload', function () {});
-
-  // Remove fade-out class on page load so scene is visible
+  // Remove fade-out class on page load so the scene is visible again
   window.addEventListener('load', () => {
     document.body.classList.remove('fade-out');
-
-    // Fallback: if opacity is still zero, reload page
-    setTimeout(() => {
-      const style = window.getComputedStyle(document.body);
-      if (style.opacity === '0') {
-        window.location.reload();
-      }
-    }, 500);
   });
 
-  // Reload page if loaded from back-forward cache
+  // Reload page if coming back via browser cache to avoid black screen
   window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
       window.location.reload();
