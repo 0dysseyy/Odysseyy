@@ -12,39 +12,21 @@
       align-items: center;
       height: 100vh;
     }
-    .video-container {
-      position: relative;
-      width: 100%;
-      max-width: 100vw;
-      height: 56.25vw; /* 16:9 aspect ratio */
-      max-height: 100vh;
-      overflow: hidden;
-    }
-    iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      pointer-events: none; /* disables clicks */
+    video {
+      max-width: 100%;
+      height: auto;
     }
   </style>
 </head>
 <body>
 
-<div class="video-container">
-  <iframe
-    src="https://www.youtube.com/embed/Gtnke4Tj0fg?start=6&autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0&loop=0&iv_load_policy=3"
-    allow="autoplay; encrypted-media"
-    allowfullscreen
-  ></iframe>
-</div>
+<!-- Optional video transition -->
+<video src="transition.mp4" autoplay muted></video>
 
 <script>
-  // Redirect after 3 seconds (video plays 6s to 9s)
   setTimeout(() => {
     window.location.href = 'Directory.html';
-  }, 3000);
+  }, 3000); // Adjust to match video duration
 </script>
 
 </body>
