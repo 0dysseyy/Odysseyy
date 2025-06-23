@@ -67,5 +67,19 @@
   });
 </script>
 
+<script>
+  // Remove fade-out class on page load so the scene is visible again
+  window.addEventListener('load', () => {
+    document.body.classList.remove('fade-out');
+  });
+
+  // Reload page if coming back via browser cache to avoid black screen
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      window.location.reload();
+    }
+  });
+</script>
+
 </body>
 </html>
