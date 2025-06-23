@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact Me</title>
 
-  <!-- Import NovaCut font from Google Fonts -->
+  <!-- Import Nova Cut font from Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet" />
 
   <style>
@@ -15,6 +15,32 @@
       padding: 2em;
       background-color: black;
       color: white;
+      position: relative;
+    }
+
+    /* Top corner links */
+    .nav-link {
+      position: absolute;
+      top: 1rem;
+      padding: 0.5em 1em;
+      background-color: #0A66C2;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background-color: #004182;
+    }
+
+    .left-link {
+      left: 1rem;
+    }
+
+    .right-link {
+      right: 1rem;
     }
 
     h1 {
@@ -85,6 +111,10 @@
   </style>
 </head>
 <body>
+
+  <!-- Navigation Links -->
+  <a href="films.html" class="nav-link left-link">🎬 Films</a>
+  <a href="Directory.html" class="nav-link right-link">📁 Directory</a>
 
   <h1>Contact Me</h1>
 
