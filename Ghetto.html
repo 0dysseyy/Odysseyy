@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ghetto Suburbs</title>
+
+  <!-- Nova Cut Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Nova Cut', cursive;
+      text-align: center;
+      padding: 2rem;
+      margin: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+    }
+
+    .nav-links a {
+      color: #0af;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+      margin: 3rem 0 1.5rem;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-top: 2rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .coming-soon {
+      font-style: italic;
+      color: #ffcc00;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+    }
+
+    #countdown {
+      font-size: 2rem;
+      margin-top: 1.5rem;
+      font-weight: bold;
+      color: #0af;
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      #countdown {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-links">
+    <a href="Directory.html">← Back to Directory</a>
+    <a href="films.html">🎞️ View All Films</a>
+  </div>
+
+  <h1>Stay tuned</h1>
+
+  <img src="ghetto1.png" alt="Ghetto Suburbs Poster" />
+
+  <p>
+    Just be here when it happens.
+  </p>
+
+  <p class="coming-soon">GHETTO SUBURBS - PRE PRODUCTION</p>
+
+  <h2>Countdown</h2>
+  <div id="countdown">Loading...</div>
+
+  <script>
+    const launchDate = new Date("October 18, 2025 16:20:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        countdownEl.innerHTML = "🎬 It's here!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script>
+
+</body>
+</html>

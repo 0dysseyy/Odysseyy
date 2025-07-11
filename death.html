@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Only Death Doesn’t Lie</title>
+
+  <!-- Nova Cut Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Nova Cut', cursive;
+      margin: 0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 2rem;
+      z-index: 1000;
+    }
+
+    .nav-links a {
+      color: #0af;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    header h1 {
+      text-align: center;
+      font-size: 3rem;
+      margin-top: 4rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      color: #fefefe;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+      margin-bottom: 2rem;
+    }
+
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      text-align: center;
+    }
+
+    strong {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-links">
+    <a href="Directory.html">← Back to Directory</a>
+    <a href="films.html">🎞️ All Films</a>
+  </div>
+
+  <header>
+    <h1>Only Death Doesn’t Lie</h1>
+  </header>
+
+  <div class="video-container">
+    <video src="death.mov" controls></video>
+  </div>
+
+  <p>
+    <strong>Synopsis:</strong><br>
+    My first edit. An abstract contemporary piece encompassing death, religion, war, grief, and the human condition. 
+  </p>
+
+</body>
+</html>

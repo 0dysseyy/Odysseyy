@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Film Gallery</title>
+
+<!-- Nova Cut font -->
+<link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet" />
+
+<!-- Polyfill for import maps (required) -->
+<script async src="https://unpkg.com/es-module-shims@2.6.0/dist/es-module-shims.js"></script>
+
+<!-- Import map for Spline runtime -->
+<script type="importmap">
+  {
+    "imports": {
+      "@splinetool/runtime": "https://unpkg.com/@splinetool/runtime@latest/build/runtime.js"
+    }
+  }
+</script>
+
+<style>
+  body {
+    margin: 0;
+    padding: 2rem;
+    background: black;
+    font-family: 'Nova Cut', cursive;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .film-item {
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    background: #111;
+    transition: transform 0.3s ease;
+    width: 90vw;
+    max-width: 800px;
+  }
+
+  .film-item:hover {
+    transform: scale(1.05);
+  }
+
+  canvas {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    background: black;
+    will-change: transform;
+  }
+
+  .title {
+    text-align: center;
+    padding: 0.5rem 0;
+    font-weight: normal;
+    font-size: 1.2rem;
+    user-select: none;
+  }
+
+  /* Back link styling */
+  .back-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    color: #0af;
+    font-size: 1.1rem;
+    text-decoration: none;
+    z-index: 1000;
+    font-weight: bold;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<a href="Directory.html" class="back-link">← Back to Directory</a>
+
+<div class="film-item">
+  <canvas id="canvas1"></canvas>
+  <div class="title">The Step of Luck</div>
+</div>
+
+<div class="film-item">
+  <canvas id="canvas2"></canvas>
+  <div class="title">Fragment</div>
+</div>
+
+<div class="film-item">
+  <canvas id="canvas3"></canvas>
+  <div class="title">The Suspect</div>
+</div>
+
+<div class="film-item">
+  <canvas id="canvas4"></canvas>
+  <div class="title">Figment</div>
+</div>
+
+<div class="film-item">
+  <canvas id="canvas5"></canvas>
+  <div class="title">Ghetto Suburbs</div>
+</div>
+
+<script type="module">
+  import { Application } from '@splinetool/runtime';
+
+  const films = [
+    {
+      canvasId: 'canvas1',
+      splineUrl: 'https://prod.spline.design/UBl1LTRptavYPZ2l/scene.splinecode',
+      redirectUrl: 'step.html'
+    },
+    {
+      canvasId: 'canvas2',
+      splineUrl: 'https://prod.spline.design/en3dsmoMmRFmNRtZ/scene.splinecode',
+      redirectUrl: 'Fragment.html'
+    },
+    {
+      canvasId: 'canvas3',
+      splineUrl: 'https://prod.spline.design/Lco2LiOi3l-DzvXn/scene.splinecode',
+      redirectUrl: 'suspect.html'
+    },
+    {
+      canvasId: 'canvas4',
+      splineUrl: 'https://prod.spline.design/7LrnC9rnyFFNd6jY/scene.splinecode',
+      redirectUrl: 'Figment.html'
+    },
+    {
+      canvasId: 'canvas5',
+      splineUrl: 'https://prod.spline.design/ik-6a9OO-hH9qWVT/scene.splinecode',
+      redirectUrl: 'Ghetto.html'
+    }
+  ];
+
+  films.forEach(({ canvasId, splineUrl, redirectUrl }) => {
+    const canvas = document.getElementById(canvasId);
+    const app = new Application(canvas);
+    app.load(splineUrl).then(() => {
+      console.log(`✅ Loaded ${splineUrl}`);
+    }).catch((err) => {
+      console.error(`❌ Error loading ${splineUrl}:`, err);
+    });
+
+    canvas.addEventListener('mousedown', () => {
+      window.location.href = redirectUrl;
+    });
+  });
+</script>
+
+</body>
+</html>

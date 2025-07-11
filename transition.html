@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loading...</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    video {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Optional video transition -->
+<video src="transition.mp4" autoplay muted playsinline></video>
+
+<script>
+  setTimeout(() => {
+    window.location.href = 'Directory.html';
+  }, 3000); // Adjust to match video duration
+</script>
+
+</body>
+</html>
